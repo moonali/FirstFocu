@@ -1,0 +1,97 @@
+﻿@model IEnumerable<TestProjectForFirstfocus.ViewModel.ProductVM>
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Product Details</h1>
+<hr />
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                @foreach (var pd in Model)
+                {
+                    <div class="preview col-md-6">
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1">
+                                <img src="@pd.BiggerImage" />
+                            </div>
+                            <div class="tab-pane" id="pic-2"><img src="@pd.BiggerImage" /></div>
+                            <div class="tab-pane" id="pic-3"><img src="@pd.BiggerImage" /></div>
+                            <div class="tab-pane" id="pic-4"><img src="@pd.BiggerImage" /></div>
+                            <div class="tab-pane" id="pic-5"><img src="@pd.BiggerImage" /></div>
+                            <div class="tab-pane" id="pic-6"><img src="@pd.BiggerImage" /></div>
+                        </div>
+                        <ul class="preview-thumbnail nav nav-tabs">
+                            <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="@pd.BiggerImage" /></a></li>
+                            <li><a data-target="#pic-2" data-toggle="tab"><img src="@pd.BiggerImage" /></a></li>
+                            <li><a data-target="#pic-3" data-toggle="tab"><img src="@pd.BiggerImage" /></a></li>
+                            <li><a data-target="#pic-4" data-toggle="tab"><img src="@pd.BiggerImage" /></a></li>
+                            <li><a data-target="#pic-5" data-toggle="tab"><img src="@pd.BiggerImage" /></a></li>
+                        </ul>
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title">@pd.ProductName</h3>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <span class="review-no">@pd.customerReviewCount reviews</span>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(pd.ShortDescription))
+                        {
+                            <p class="product-description">@pd.ShortDescription</p>
+                        }
+                        else
+                        {
+                            <p class="product-description">
+                        (Empty Description ) Enhance your manufacturer warranty and get extended coverage when the warranty ends, including: Annual maintenance of your DVD player at a Best Buy store.If there's a failure from normal wear and tear, we'll repair it.If your original remote control fails, we'll replace it.You'll never pay for parts and labor on covered repairs</p>
+                        }
+                        @if (pd.onSale)
+                        {
+                            <h4 class="price">
+                                Old price: <span>
+                                    <del>&euro;@pd.ProductPrice <br></del>
+                                </span>
+                            </h4>
+                            <h4 class="price">
+                                Sale price:
+                                <span>
+                                    &euro;@pd.ProductsalePrice <br>
+                                </span>
+                            </h4>
+                        }
+                        else
+                        {
+                            <h4 class="price">
+                                Current price:
+                                <span>
+                                    &euro;@pd.ProductPrice <br>
+                                </span>
+                            </h4>
+                        }
+                        <h4 class="price">
+                            Average Review : 
+                            <span>
+                                @pd.customerReviewAverage
+                            </span>
+                        </h4>
+                        <div class="action">
+                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                                
+                        </div>
+                    </div>
+
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<link href="~/css/details.css" rel="stylesheet" />
